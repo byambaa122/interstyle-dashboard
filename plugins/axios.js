@@ -1,12 +1,11 @@
 export default function ({ $axios, redirect }) {
-    // $axios.onRequest(config => {
-    // })
+    $axios.onRequest(config => {
+        config.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+    })
 
-    // $axios.onResponse(response => {
-    // })
-
-    // $axios.onError(err => {
-    //     if (err.response.status === 401) {
-    //     }
-    // })
+    $axios.onError(err => {
+        if (err.response.status === 401) {
+            //
+        }
+    })
 }

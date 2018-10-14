@@ -3,7 +3,7 @@ const resolve = (dir) => require('path').join(__dirname, dir)
 
 module.exports = {
     head: {
-        title: 'iHotel',
+        title: 'interstyle',
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -40,6 +40,7 @@ module.exports = {
         }
     },
     css: [
+        '@mdi/font/css/materialdesignicons.css',
         '~/assets/style/app.styl'
     ],
     loading: {

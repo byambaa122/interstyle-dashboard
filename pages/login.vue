@@ -3,11 +3,11 @@
         <v-layout justify-center row wrap>
             <v-flex xs12 sm8 md6 lg4>
                 <v-card class="mt-4 pt-4">
-                    <v-card-media src="images/logo.png" height="45" contain></v-card-media>
                     <v-form @submit.prevent="login()">
                         <v-card-text>
-                            <v-text-field v-model="email" :error-messages="emailErrors" label="И-мэйл хаяг"></v-text-field>
-                            <v-text-field v-model="password" :error-messages="passwordErrors" :append-icon="showPassword ? 'visibility_off' : 'visibility'" @click:append="showPassword = !showPassword" :type="showPassword ? 'text' : 'password'" label="Нууц үг"></v-text-field>
+                            <v-card-media class="mb-5" src="images/logo.png" height="80" position="left center" contain></v-card-media>
+                            <v-text-field v-model="email" :error-messages="emailErrors" label="И-мэйл хаяг" outline></v-text-field>
+                            <v-text-field v-model="password" :error-messages="passwordErrors" :append-icon="showPassword ? 'visibility_off' : 'visibility'" @click:append="showPassword = !showPassword" :type="showPassword ? 'text' : 'password'" label="Нууц үг" outline></v-text-field>
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>

@@ -1,6 +1,6 @@
-# iHotel PMS
+# interstyle
 
-АйХотел ХХК хөгжүүлж буй захиалгын систем.
+Интерстиль ХХК танилцуулга веб хуудсын админ удирдлага.
 
 - [Vue JS](https://vuejs.org)
 - [Nuxt JS](https://nuxtjs.org)

@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import { Resize } from 'vuetify/es5/directives'
 import {
     Vuetify,
     VApp,
@@ -19,6 +18,7 @@ import {
     VJumbotron,
     VForm,
     VDataTable,
+    VProgressLinear,
     VPagination,
     VDivider,
     VDialog,
@@ -27,6 +27,7 @@ import {
 } from 'vuetify'
 
 Vue.use(Vuetify, {
+    iconfont: 'mdi',
     theme: {
         primary: '#04639b'
     },
@@ -48,13 +49,11 @@ Vue.use(Vuetify, {
         VJumbotron,
         VForm,
         VDataTable,
+        VProgressLinear,
         VPagination,
         VDivider,
         VDialog,
         VAvatar,
         VChip
-    },
-    directives: {
-        Resize
     }
 })
