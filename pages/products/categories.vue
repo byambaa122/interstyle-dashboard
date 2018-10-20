@@ -1,43 +1,75 @@
 <template>
     <Page :title="title">
         <div class="mt-3">
-            <ListTable url="product/categories" :headers="headers">
-                <template slot="actions">
-                    <div class="text-xs-right">
-                        <v-btn color="primary" @click="setProductCategory" dark>
-                            <v-icon left>add</v-icon>
-                            Шинэ
-                        </v-btn>
-                    </div>
-                </template>
+            <!-- Data table -->
+            <DataTable
+                :headers="headers"
+                :items.sync="productCategories"
+                :baseUrl="baseUrl"
+                ref="table"
+            >
+                <!-- Data table rows -->
                 <template slot="items" slot-scope="props">
                     <td>{{ props.item.name }}</td>
                     <td>{{ props.item.createdAt }}</td>
                     <td>{{ props.item.updatedAt }}</td>
                     <td class="text-xs-right">
-                        <v-btn icon @click="setProductCategory(props.item)">
-                            <v-icon color="teal">mdi-pencil</v-icon>
+                        <v-btn @click="setModel(props.item)" icon>
+                            <v-icon color="grey">mdi-pencil</v-icon>
                         </v-btn>
                     </td>
                 </template>
-            </ListTable>
+            </DataTable>
+            <!-- Edit form -->
+            <DrawerForm
+                :model="productCategory"
+                :drawer.sync="drawer"
+                @hide="$refs.table.getDataFromApi()"
+                :baseUrl="baseUrl"
+                ref="form"
+            >
+                <template slot="fields" slot-scope="props">
+                    <!-- Name field -->
+                    <v-text-field
+                        label="Нэр"
+                        v-model="productCategory.name"
+                        :error-messages="props.errorMessages('name')"
+                        outline
+                    ></v-text-field>
+                    <!-- Image field -->
+                    <ImageUpload v-model="productCategory.image" />
+                </template>
+            </DrawerForm>
         </div>
     </Page>
 </template>
 
 <script>
 import Page from '~/components/Page'
-import ListTable from '~/components/ListTable'
+import DataTable from '~/components/DataTable'
+import DrawerForm from '~/components/DrawerForm'
+import ImageUpload from '~/components/ImageUpload'
+
+const defaultModel = {
+    id: '',
+    name: '',
+    image: ''
+}
+
+const apiBaseUrl = 'product/categories'
 
 export default {
     layout: 'dashboard',
     components: {
         Page,
-        ListTable
+        DataTable,
+        DrawerForm,
+        ImageUpload
     },
     data() {
         return {
             title: 'Ангилал',
+            baseUrl: apiBaseUrl,
             headers: [
                 {
                     text: 'Нэр',
@@ -57,26 +89,22 @@ export default {
                 }
             ],
             drawer: false,
-            fillable: [
-                'id',
-                'name',
-                'image'
-            ],
-            productCategory: {
-                id: '',
-                name: '',
-                image: ''
+            productCategory: defaultModel
+        }
+    },
+    async asyncData({ app }) {
+        const { data, total } = await app.$axios.$get(apiBaseUrl)
+
+        return {
+            productCategories: {
+                data,
+                total
             }
         }
     },
-    async fetch({ store }) {
-        await store.dispatch('fetchData', {
-            url: 'product/categories'
-        })
-    },
     methods: {
-        setProductCategory(data = {}) {
-            this.productCategory = this.cloneObject(data, this.fillable)
+        setModel(data) {
+            this.productCategory = this.cloneObject(data, Object.keys(defaultModel))
             this.drawer = true
         }
     }

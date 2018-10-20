@@ -1,5 +1,6 @@
 <template>
     <v-container fluid grid-list-lg>
+        <!-- Page title -->
         <div class="page-title">
             {{ title }}
         </div>

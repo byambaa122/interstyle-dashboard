@@ -1,7 +1,6 @@
-const nodeExternals = require('webpack-node-externals')
-const resolve = (dir) => require('path').join(__dirname, dir)
+import 'dotenv/config'
 
-module.exports = {
+export default {
     head: {
         title: 'interstyle',
         meta: [
@@ -15,18 +14,18 @@ module.exports = {
         ]
     },
     modules: [
+        '@nuxtjs/auth',
         '@nuxtjs/axios',
-        '@nuxtjs/auth'
+        '@nuxtjs/dotenv'
     ],
     plugins: [
-        '~/plugins/mixins.js',
+        '~/plugins/axios.js',
         '~/plugins/filters.js',
-        '~/plugins/vuetify.js',
-        '~/plugins/axios.js'
+        '~/plugins/mixins.js',
+        '~/plugins/vuetify.js'
     ],
     axios: {
-        baseURL: 'http://localhost/interstyle/public/api'
-        // proxyHeaders: false
+        baseURL: process.env.BASE_URL
     },
     auth: {
         strategies: {
@@ -36,47 +35,36 @@ module.exports = {
                     login: { url: '/login', method: 'post', propertyName: 'accessToken' },
                     logout: false
                 }
+            },
+            redirect: {
+                login: '/login',
+                logout: '/login',
+                callback: '/login',
+                home: '/'
             }
         }
     },
     css: [
         '@mdi/font/css/materialdesignicons.css',
+        'vue-croppa/dist/vue-croppa.css',
         '~/assets/style/app.styl'
     ],
     loading: {
         color: '#3B8070'
     },
     build: {
-        babel: {
-            plugins: [
-                ['transform-imports', {
-                    'vuetify': {
-                        'transform': 'vuetify/es5/components/${member}',
-                        'preventFullImport': true
-                    }
-                }]
-            ]
-        },
-        vendor: [
-            '~/plugins/vuetify.js'
-        ],
         extractCSS: true,
-        cssSourceMap: false,
-        extend(config, ctx) {
-            if (ctx.isDev && ctx.isClient) {
+        /*
+        ** Run ESLint on save
+        */
+        extend(config, { isDev }) {
+            if (isDev && process.client) {
                 config.module.rules.push({
                     enforce: 'pre',
                     test: /\.(js|vue)$/,
                     loader: 'eslint-loader',
                     exclude: /(node_modules)/
                 })
-            }
-            if (ctx.isServer) {
-                config.externals = [
-                    nodeExternals({
-                        whitelist: [/^vuetify/]
-                    })
-                ]
             }
         }
     }

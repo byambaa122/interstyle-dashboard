@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { debounce } from 'lodash'
+import { debounce, isEqual } from 'lodash'
 
 Vue.mixin({
     methods: {
@@ -7,10 +7,13 @@ Vue.mixin({
             let clone = JSON.parse(JSON.stringify(obj))
 
             if (fillable && Array.isArray(fillable)) {
-                clone = fillable.reduce((current, prop) => Object.assign(current, { [prop]: clone[prop] || null }), {})
+                clone = fillable.reduce((current, prop) => Object.assign(current, { [prop]: clone.hasOwnProperty(prop) ? clone[prop] : null }), {})
             }
 
             return clone
+        },
+        isEqual(a, b, fillable = null) {
+            return isEqual(this.cloneObject(a, fillable), this.cloneObject(b, fillable))
         },
         spliceById(array, id, item = null) {
             const i = array.findIndex(item => item.id === id)

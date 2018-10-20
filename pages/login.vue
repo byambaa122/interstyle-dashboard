@@ -5,13 +5,45 @@
                 <v-card class="mt-4 pt-4">
                     <v-form @submit.prevent="login()">
                         <v-card-text>
-                            <v-card-media class="mb-5" src="images/logo.png" height="80" position="left center" contain></v-card-media>
-                            <v-text-field v-model="email" :error-messages="emailErrors" label="И-мэйл хаяг" outline></v-text-field>
-                            <v-text-field v-model="password" :error-messages="passwordErrors" :append-icon="showPassword ? 'visibility_off' : 'visibility'" @click:append="showPassword = !showPassword" :type="showPassword ? 'text' : 'password'" label="Нууц үг" outline></v-text-field>
+                            <!-- Logo -->
+                            <v-img
+                                class="mb-5"
+                                src="/images/logo.png"
+                                position="left center"
+                                height="80"
+                                contain
+                            ></v-img>
+                            <!-- Email field -->
+                            <v-text-field
+                                v-model="email"
+                                :error-messages="errorMessages('email')"
+                                label="И-мэйл хаяг"
+                                outline
+                            ></v-text-field>
+                            <!-- Password field -->
+                            <v-text-field
+                                v-model="password"
+                                :error-messages="errorMessages('password')"
+                                :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+                                :type="showPassword ? 'text' : 'password'"
+                                @click:append="showPassword = !showPassword"
+                                label="Нууц үг"
+                                outline
+                            ></v-text-field>
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn flat type="submit" color="primary" class="mt-3" :loading="loading">Нэвтрэх</v-btn>
+                            <!-- Submit button -->
+                            <v-btn
+                                :loading="loading"
+                                type="submit"
+                                color="blue-grey lighten-5"
+                                class="elevation-0"
+                                large
+                            >
+                                Нэвтрэх
+                                <v-icon right>mdi-arrow-right</v-icon>
+                            </v-btn>
                         </v-card-actions>
                     </v-form>
                 </v-card>
@@ -31,30 +63,19 @@ export default {
             password: ''
         }
     },
-    computed: {
-        emailErrors() {
+    methods: {
+        errorMessages(prop) {
             let errors = []
-            if (this.errors.email) {
-                errors = this.errors.email
+            if (this.errors.hasOwnProperty(prop)) {
+                errors = this.errors[prop]
             }
 
             return errors
         },
-        passwordErrors() {
-            let errors = []
-            if (this.errors.password) {
-                errors = this.errors.password
-            }
-
-            return errors
-        }
-    },
-    methods: {
         async login() {
-            this.errors = {}
-            this.loading = true
-
             try {
+                this.errors = {}
+                this.loading = true
                 await this.$auth.loginWith('local', {
                     data: {
                         email: this.email,
@@ -74,12 +95,12 @@ export default {
 
 <style lang="stylus" scoped>
 .v-card__text
-    padding-top: 25px;
+    padding-top 25px
 
 @media (min-width: 600px)
     .v-card__text
-        padding: 30px 45px 10px;
+        padding 30px 45px 10px
 
     .v-card__actions
-        padding: 0 45px 30px;
+        padding 0 45px 30px
 </style>
