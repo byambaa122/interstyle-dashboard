@@ -37,7 +37,10 @@
                         outline
                     ></v-text-field>
                     <!-- Image field -->
-                    <ImageUpload v-model="productCategory.image" />
+                    <ImageUpload
+                        v-model="productCategory.image"
+                        :error-messages="props.errorMessages('image')"
+                    />
                 </template>
             </DrawerForm>
         </div>

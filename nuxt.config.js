@@ -10,7 +10,7 @@ export default {
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
+            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' }
         ]
     },
     modules: [
@@ -46,7 +46,6 @@ export default {
     },
     css: [
         '@mdi/font/css/materialdesignicons.css',
-        'vue-croppa/dist/vue-croppa.css',
         '~/assets/style/app.styl'
     ],
     loading: {

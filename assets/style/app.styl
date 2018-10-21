@@ -1,4 +1,4 @@
-@import '~vuetify/src/stylus/main' 
+@import '~vuetify/src/stylus/main'
 
 box-shadow()
     -webkit-box-shadow arguments
@@ -34,11 +34,12 @@ body,
             font-weight 400
 
             .v-list__tile__title
+                font-weight 500
                 color rgba(0, 0, 0, 0.54)
 
             &.v-list__tile--active
-                background-color rgba(4, 99, 155, 0.1)
-                color #04639b !important
+                background-color rgba(4, 99, 155, 0.06)
+                color #0078d4 !important
 
                 &:before
                     content ' '
@@ -48,11 +49,10 @@ body,
                     left 0
                     bottom 0
                     width 4px
-                    background-color #04639b
+                    background-color #0078d4
 
                 .v-list__tile__title
-                    font-weight 500
-                    color #04639b
+                    color #0078d4
 
     .v-navigation-drawer__border
         display none
@@ -63,18 +63,21 @@ body,
 
 .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat)
     .v-input__slot
-        box-shadow(0 2px 8px rgba(0, 0, 0, 0.08))
+        box-shadow(0 2px 8px rgba(0, 0, 0, 0.05))
 
 .v-pagination__item,
 .v-pagination__navigation
-    box-shadow(0 2px 8px rgba(0, 0, 0, 0.08))
+    box-shadow(0 2px 8px rgba(0, 0, 0, 0.05))
 
 .v-card,
 .v-dialog
     border-radius 0
 
 .v-card:not(.v-card--flat)
-    box-shadow(0 2px 8px rgba(0, 0, 0, 0.08))
+    box-shadow(0 2px 8px rgba(0, 0, 0, 0.05))
+
+.v-menu__content
+    box-shadow(0 2px 8px rgba(0, 0, 0, 0.05))
 
 .page-title
     font-size 24px

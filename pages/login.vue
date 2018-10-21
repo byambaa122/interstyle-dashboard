@@ -24,7 +24,7 @@
                             <v-text-field
                                 v-model="password"
                                 :error-messages="errorMessages('password')"
-                                :append-icon="showPassword ? 'visibility_off' : 'visibility'"
+                                :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                                 :type="showPassword ? 'text' : 'password'"
                                 @click:append="showPassword = !showPassword"
                                 label="Нууц үг"
