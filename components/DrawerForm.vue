@@ -65,12 +65,6 @@ export default {
             type: String,
             required: true
         },
-        fields: {
-            type: Array,
-            default() {
-                return []
-            }
-        },
         deletable: {
             type: Boolean,
             default: true

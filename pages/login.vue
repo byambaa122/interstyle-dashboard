@@ -2,7 +2,7 @@
     <v-container fluid>
         <v-layout justify-center row wrap>
             <v-flex xs12 sm8 md6 lg4>
-                <v-card class="mt-4 pt-4">
+                <v-card class="mt-4 pt-4" flat>
                     <v-form @submit.prevent="login()">
                         <v-card-text>
                             <!-- Logo -->

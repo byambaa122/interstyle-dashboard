@@ -7,7 +7,9 @@ Vue.mixin({
             let clone = JSON.parse(JSON.stringify(obj))
 
             if (fillable && Array.isArray(fillable)) {
-                clone = fillable.reduce((current, prop) => Object.assign(current, { [prop]: clone.hasOwnProperty(prop) ? clone[prop] : null }), {})
+                clone = fillable.reduce((current, prop) => Object.assign(current, {
+                    [prop]: clone.hasOwnProperty(prop) ? clone[prop] : ''
+                }), {})
             }
 
             return clone
@@ -15,8 +17,8 @@ Vue.mixin({
         isEqual(a, b, fillable = null) {
             return isEqual(this.cloneObject(a, fillable), this.cloneObject(b, fillable))
         },
-        spliceById(array, id, item = null) {
-            const i = array.findIndex(item => item.id === id)
+        spliceByKey(array, key, value, item = null) {
+            const i = array.findIndex(arrayItem => arrayItem[key] === value)
 
             if (item) {
                 array.splice(i, 1, item)
