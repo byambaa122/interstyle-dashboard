@@ -13,7 +13,7 @@
                     max-width="500px"
                     flat
                 >
-                    <v-form @submit.prevent="login()">
+                    <v-form @submit.prevent="register()">
                         <v-card-text>
                             <!-- Logo -->
                             <v-img
@@ -54,7 +54,7 @@
                                 large
                                 round
                             >
-                                Нэвтрэх
+                                Бүртгүүлэх
                                 <v-icon
                                     color="grey darken-1"
                                     right
@@ -69,10 +69,13 @@
                 </v-card>
                 <!-- Forgot password -->
                 <div class="subheading text-xs-center grey--text text--darken-1">
-                    Нууц үгээ мартсан уу?
-                    <a class="font-weight-medium ml-2">
-                        Шинэчлэх
-                    </a>
+                    Аль хэдийн бүртгүүлсэн үү?
+                    <router-link
+                        class="font-weight-medium ml-2"
+                        to="/login"
+                    >
+                        Нэвтрэх
+                    </router-link>
                 </div>
             </v-flex>
         </v-layout>
@@ -111,18 +114,19 @@ export default {
 
             return errors
         },
-        async login() {
+        async register() {
             try {
                 this.errors = {}
                 this.loading = true
-                await this.$auth.loginWith('local', {
-                    data: {
-                        email: this.email,
-                        password: this.password
-                    }
+                await this.$axios.post('register', {
+                    email: this.email,
+                    password: this.password
                 })
+                // Redirect to login page
+                this.$router.push('/login')
             } catch (err) {
                 if (err.response.status === 422) {
+                    console.log(err)
                     this.errors = err.response.data.errors
                     this.loading = false
                 }

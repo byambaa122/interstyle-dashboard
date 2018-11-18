@@ -8,17 +8,34 @@
         app
     >
         <!-- Logo -->
-        <router-link class="drawer-image" to="/">
-            <img :src="imageSrc" height="35">
+        <router-link
+            class="drawer-image"
+            to="/"
+        >
+            <img
+                :src="imageSrc"
+                height="35"
+            >
         </router-link>
         <!-- Main menu -->
         <v-list>
-            <v-list-tile v-for="(item, i) in items" :key="i" :to="item.to" nuxt exact>
+            <v-list-tile
+                v-for="(item, i) in items"
+                :key="i"
+                :to="item.to"
+                nuxt
+            >
+                <!-- Icon -->
                 <v-list-tile-action>
-                    <v-icon v-html="item.icon"></v-icon>
+                    <v-icon>
+                        {{ item.icon }}
+                    </v-icon>
                 </v-list-tile-action>
+                <!-- Title -->
                 <v-list-tile-content>
-                    <v-list-tile-title v-text="item.title"></v-list-tile-title>
+                    <v-list-tile-title>
+                        {{ item.title }}
+                    </v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>
         </v-list>
@@ -42,7 +59,8 @@ export default {
             items: [
                 { icon: 'mdi-home', title: 'Нүүр', to: '/' },
                 { icon: 'mdi-account', title: 'Хэрэглэгч', to: '/users' },
-                { icon: 'mdi-layers', title: 'Ангилал', to: '/products/categories' }
+                { icon: 'mdi-lamp', title: 'Бүтээгдэхүүн', to: '/products' },
+                { icon: 'mdi-wall', title: 'Материал', to: '/materials' }
             ]
         }
     },

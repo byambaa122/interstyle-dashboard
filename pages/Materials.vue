@@ -4,15 +4,31 @@
             <!-- Data table -->
             <DataTable
                 :headers="headers"
-                :items.sync="users"
+                :items.sync="materials"
                 :baseUrl="baseUrl"
                 ref="table"
             >
+                <!-- Actions -->
+                <template slot="actions">
+                    <div class="text-xs-right">
+                        <v-btn
+                            @click="setModel()"
+                            class="teal lighten-5 teal--text"
+                            flat
+                        >
+                            <v-icon left>
+                                mdi-plus-circle-outline
+                            </v-icon>
+                            Шинэ
+                        </v-btn>
+                    </div>
+                </template>
                 <!-- Data table rows -->
-                <template slot="items" slot-scope="props">
-                    <td>{{ props.item.name }}</td>
-                    <td>{{ props.item.email }}</td>
-                    <td>{{ props.item.isAdmin ? 'Админ' : 'Хэрэглэгч' }}</td>
+                <template
+                    slot="items"
+                    slot-scope="props"
+                >
+                    <td>{{ props.item.code }}</td>
                     <td>{{ props.item.createdAt }}</td>
                     <td>{{ props.item.updatedAt }}</td>
                     <td class="text-xs-right">
@@ -27,9 +43,11 @@
                     </td>
                 </template>
             </DataTable>
+            <!-- Bottom navigation -->
+            <MenuBottom :items="items" />
             <!-- Edit form -->
             <DrawerForm
-                :model="user"
+                :model="material"
                 :drawer.sync="drawer"
                 @hide="$refs.table.getDataFromApi()"
                 :baseUrl="baseUrl"
@@ -39,40 +57,29 @@
                     slot="fields"
                     slot-scope="props"
                 >
-                    <!-- Name field -->
+                    <!-- Code field -->
                     <v-text-field
                         label="Нэр"
-                        v-model="user.name"
+                        v-model="material.code"
                         :error-messages="props.errorMessages('name')"
                         outline
                     ></v-text-field>
-                    <!-- Email field -->
-                    <v-text-field
-                        label="И-мэйл хаяг"
-                        v-model="user.email"
+                    <!-- Material category field -->
+                     <v-select
+                        label="Ангилал"
+                        v-model="material.materialCategory"
+                        :error-messages="props.errorMessages('materialCategory')"
+                        :items="materialCategories"
+                        item-text="name"
+                        return-object
                         outline
-                    ></v-text-field>
-                    <!-- Password field -->
-                    <v-text-field
-                        v-model="user.password"
-                        :error-messages="props.errorMessages('password')"
-                        :type="passwordFieldType"
-                        :append-icon="passwordFieldIcon"
-                        @click:append="showPassword = !showPassword"
-                        label="Нууц үг солих"
-                        outline
-                    ></v-text-field>
+                    ></v-select>
                     <!-- Image field -->
                     <ImageUpload
-                        v-model="user.avatar"
-                        :error-messages="props.errorMessages('avatar')"
+                        v-model="material.images"
+                        :error-messages="props.errorMessages('images')"
+                        multiple
                     />
-                    <!-- is Admin -->
-                     <v-checkbox
-                        label="Админ"
-                        v-model="user.isAdmin"
-                        color="primary"
-                    ></v-checkbox>
                 </template>
             </DrawerForm>
         </div>
@@ -82,6 +89,7 @@
 <script>
 import {
     Page,
+    MenuBottom,
     DataTable,
     DrawerForm,
     ImageUpload
@@ -89,39 +97,43 @@ import {
 
 const defaultModel = {
     id: '',
-    name: '',
-    email: '',
-    avatar: '',
-    password: '',
-    isAdmin: false
+    code: '',
+    images: [],
+    materialCategory: {
+        id: '',
+        name: ''
+    }
 }
 
-const apiBaseUrl = 'users'
+const apiBaseUrl = 'materials'
 
 export default {
     layout: 'dashboard',
     components: {
         Page,
+        MenuBottom,
         DataTable,
         DrawerForm,
         ImageUpload
     },
     data() {
         return {
-            title: 'Хэрэглэгч',
+            title: 'Материал',
             baseUrl: apiBaseUrl,
+            items: [
+                {
+                    title: 'Материал',
+                    to: '/materials'
+                },
+                {
+                    title: 'Ангилал',
+                    to: '/materials/categories'
+                }
+            ],
             headers: [
                 {
-                    text: 'Нэр',
-                    value: 'name'
-                },
-                {
-                    text: 'И-мэйл хаяг',
-                    value: 'email'
-                },
-                {
-                    text: 'Эрх',
-                    value: 'isAdmin'
+                    text: 'Код',
+                    value: 'code'
                 },
                 {
                     text: 'Үүсгэсэн',
@@ -137,35 +149,31 @@ export default {
                 }
             ],
             drawer: false,
-            showPassword: false,
-            user: defaultModel
+            material: defaultModel
         }
     },
     async asyncData({ app }) {
+        // Get paginated materials data
         const { data, total } = await app.$axios.$get(apiBaseUrl)
 
+        // Get all material categories
+        const paginationData = await app.$axios.$get('material/categories', {
+            params: {
+                rowsPerPage: -1
+            }
+        })
+
         return {
-            users: {
+            materialCategories: paginationData.data,
+            materials: {
                 data,
                 total
             }
         }
     },
-    computed: {
-        passwordFieldType() {
-            return this.showPassword
-                ? 'text'
-                : 'password'
-        },
-        passwordFieldIcon() {
-            return this.showPassword
-                ? 'mdi-eye-off'
-                : 'mdi-eye'
-        }
-    },
     methods: {
-        setModel(data) {
-            this.user = this.cloneObject(data, Object.keys(defaultModel))
+        setModel(data = defaultModel) {
+            this.material = this.cloneObject(data, Object.keys(defaultModel))
             this.drawer = true
         }
     }

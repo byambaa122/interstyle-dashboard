@@ -7,7 +7,7 @@
             :is-mobile="isMobile"
         />
         <!-- Navigation drawer -->
-        <NavigationDrawer
+        <Sidebar
             :drawer.sync="drawer"
             :mini-variant="miniVariant"
         />
@@ -19,14 +19,16 @@
 </template>
 
 <script>
-import MainToolbar from '~/components/MainToolbar'
-import NavigationDrawer from '~/components/NavigationDrawer'
+import {
+    Sidebar,
+    MainToolbar
+} from '~/components'
 
 export default {
     middleware: 'authenticated',
     components: {
         MainToolbar,
-        NavigationDrawer
+        Sidebar
     },
     data() {
         return {

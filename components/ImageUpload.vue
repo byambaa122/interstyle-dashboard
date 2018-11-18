@@ -50,16 +50,27 @@
             v-dragula="images"
             two-line
         >
-            <v-list-tile v-for="image in images" :key="image" avatar>
+            <v-list-tile
+                v-for="(image, i) in images"
+                :key="i"
+            >
                 <!-- Reorder button -->
                 <v-list-tile-action>
                     <v-btn color="grey" flat icon>
-                        <v-icon>mdi-reorder-horizontal</v-icon>
+                        <v-icon>
+                            mdi-reorder-horizontal
+                        </v-icon>
                     </v-btn>
                 </v-list-tile-action>
                 <!-- Image -->
-                <v-list-tile-avatar size="60">
-                    <v-img :src="`${baseUrl}/${image}?w=60&h=60&fit=crop`"></v-img>
+                <v-list-tile-avatar
+                    color="grey lighten-4"
+                    size="60"
+                >
+                    <v-img
+                        :src="`${baseUrl}/${image}?w=60&h=60&fit=crop`"
+                        :lazy-src="`${baseUrl}/${image}?w=5&h=5&fit=crop`"
+                    ></v-img>
                 </v-list-tile-avatar>
                 <!-- Spacer -->
                 <v-list-tile-content></v-list-tile-content>
@@ -71,7 +82,9 @@
                         flat
                         icon
                     >
-                        <v-icon>mdi-close</v-icon>
+                        <v-icon>
+                            mdi-close
+                        </v-icon>
                     </v-btn>
                 </v-list-tile-action>
             </v-list-tile>
@@ -178,3 +191,8 @@ export default {
     }
 }
 </script>
+
+<style lang="stylus" scoped>
+.v-list
+    background-color transparent !important
+</style>

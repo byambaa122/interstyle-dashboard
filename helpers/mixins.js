@@ -8,7 +8,7 @@ Vue.mixin({
 
             if (fillable && Array.isArray(fillable)) {
                 clone = fillable.reduce((current, prop) => Object.assign(current, {
-                    [prop]: clone.hasOwnProperty(prop) ? clone[prop] : ''
+                    [prop]: clone.hasOwnProperty(prop) && clone[prop] !== null ? clone[prop] : ''
                 }), {})
             }
 

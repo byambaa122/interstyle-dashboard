@@ -15,17 +15,18 @@ export default {
     },
     modules: [
         '@nuxtjs/auth',
+        '@nuxtjs/router',
         '@nuxtjs/axios',
         '@nuxtjs/dotenv'
     ],
     plugins: [
+        '~/helpers/filters.js',
+        '~/helpers/mixins.js',
         '~/plugins/axios.js',
-        '~/plugins/filters.js',
-        '~/plugins/mixins.js',
         '~/plugins/vuetify.js'
     ],
     axios: {
-        baseURL: process.env.BASE_URL
+        baseURL: `${process.env.BASE_URL}/api`
     },
     auth: {
         strategies: {
@@ -49,7 +50,7 @@ export default {
         '~/assets/style/app.styl'
     ],
     loading: {
-        color: '#3B8070'
+        color: '#0078d4'
     },
     build: {
         extractCSS: true,

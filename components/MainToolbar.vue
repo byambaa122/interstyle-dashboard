@@ -19,8 +19,13 @@
         <!-- Spacer -->
         <v-spacer></v-spacer>
         <!-- Notifications button -->
-        <v-btn class="grey--text" icon>
-            <v-icon>mdi-bell</v-icon>
+        <v-btn
+            class="grey--text"
+            icon
+        >
+            <v-icon>
+                mdi-bell
+            </v-icon>
         </v-btn>
         <!-- Profile menu -->
         <v-menu
@@ -30,15 +35,21 @@
             left
         >
             <!-- Profile menu activator -->
-            <v-btn slot="activator" large icon>
+            <v-btn
+                slot="activator"
+                large
+                icon
+            >
                 <v-avatar size="36">
-                    <img src="/images/user.png" alt="Avatar">
+                    <img :src="avatarSrc" alt="Avatar">
                 </v-avatar>
             </v-btn>
             <!-- Menu list -->
             <v-list>
                 <v-list-tile @click="logout()">
-                    <v-list-tile-title>Гарах</v-list-tile-title>
+                    <v-list-tile-title>
+                        Гарах
+                    </v-list-tile-title>
                 </v-list-tile>
             </v-list>
         </v-menu>
@@ -46,6 +57,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
     props: {
         drawer: {
@@ -59,6 +72,19 @@ export default {
         isMobile: {
             type: Boolean,
             required: true
+        }
+    },
+    data() {
+        return {
+            baseUrl: process.env.BASE_URL
+        }
+    },
+    computed: {
+        ...mapGetters([
+            'user'
+        ]),
+        avatarSrc() {
+            return this.user.avatar && `${this.baseUrl}/${this.user.avatar}?w=60&h=60&fit=crop` || 'images/user.png'
         }
     },
     methods: {
