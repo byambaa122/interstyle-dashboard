@@ -168,7 +168,11 @@ export default {
         // Get paginated product categories data
         const { data, total } = await app.$axios.$get(apiBaseUrl)
 
+        // Get all font icons
+        const { icons } = await app.$axios.$get('icons')
+
         return {
+            icons,
             productCategories: {
                 data,
                 total
