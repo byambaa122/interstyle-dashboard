@@ -49,7 +49,7 @@
             <DrawerForm
                 :model="product"
                 :drawer.sync="drawer"
-                @hide="$refs.table.getDataFromApi()"
+                @close="$refs.table.getDataFromApi()"
                 :baseUrl="baseUrl"
                 ref="form"
             >
@@ -88,11 +88,11 @@
 
 <script>
 import {
-    Page,
-    MenuBottom,
     DataTable,
     DrawerForm,
-    ImageUpload
+    ImageUpload,
+    MenuBottom,
+    Page
 } from '~/components'
 
 const defaultModel = {
@@ -105,16 +105,16 @@ const defaultModel = {
     }
 }
 
-const apiBaseUrl = 'products'
+const apiBaseUrl = 'manage/products'
 
 export default {
     layout: 'dashboard',
     components: {
-        Page,
-        MenuBottom,
         DataTable,
         DrawerForm,
-        ImageUpload
+        ImageUpload,
+        MenuBottom,
+        Page
     },
     data() {
         return {

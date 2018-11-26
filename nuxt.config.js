@@ -6,7 +6,7 @@ export default {
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { hid: 'description', name: 'description', content: 'Зочид буудал, амралтын газар, жуулчны баазын захиалгын систем' }
+            { hid: 'description', name: 'description', content: 'Интерстиль ХХК танилцуулга веб хуудсын админ удирдлага' }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -51,6 +51,10 @@ export default {
     ],
     loading: {
         color: '#0078d4'
+    },
+    server: {
+        port: 8000,
+        host: 'localhost'
     },
     build: {
         extractCSS: true,

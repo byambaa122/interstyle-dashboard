@@ -4,7 +4,7 @@
             <!-- Data table -->
             <DataTable
                 :headers="headers"
-                :items.sync="materialCategories"
+                :items.sync="features"
                 :baseUrl="baseUrl"
                 ref="table"
             >
@@ -47,7 +47,7 @@
             <MenuBottom :items="items" />
             <!-- Edit form -->
             <DrawerForm
-                :model="materialCategory"
+                :model="feature"
                 :drawer.sync="drawer"
                 @close="$refs.table.getDataFromApi()"
                 :baseUrl="baseUrl"
@@ -57,17 +57,24 @@
                     slot="fields"
                     slot-scope="props"
                 >
-                    <!-- Name field -->
+                    <!-- Title field -->
                     <v-text-field
-                        label="Нэр"
-                        v-model="materialCategory.name"
-                        :error-messages="props.errorMessages('name')"
+                        label="Гарчиг"
+                        v-model="feature.title"
+                        :error-messages="props.errorMessages('title')"
                         outline
                     ></v-text-field>
+                    <!-- Body field -->
+                    <v-textarea
+                        label="Агуулга"
+                        v-model="feature.body"
+                        :error-messages="props.errorMessages('body')"
+                        outline
+                    ></v-textarea>
                     <!-- Icon field -->
                      <v-autocomplete
                         label="Айкон"
-                        v-model="materialCategory.icon"
+                        v-model="feature.icon"
                         :error-messages="props.errorMessages('icon')"
                         :items="icons"
                         outline
@@ -100,17 +107,18 @@
 import {
     DataTable,
     DrawerForm,
-    MenuBottom,
+        MenuBottom,
     Page
 } from '~/components'
 
 const defaultModel = {
     id: '',
-    name: '',
-    icon: ''
+    icon: '',
+    title: '',
+    body: ''
 }
 
-const apiBaseUrl = 'manage/material/categories'
+const apiBaseUrl = 'manage/features'
 
 export default {
     layout: 'dashboard',
@@ -122,16 +130,16 @@ export default {
     },
     data() {
         return {
-            title: 'Материал',
+            title: 'Онцлог',
             baseUrl: apiBaseUrl,
             items: [
                 {
-                    title: 'Материал',
-                    to: '/materials'
+                    title: 'Ишлэл',
+                    to: '/settings/quotes'
                 },
                 {
-                    title: 'Ангилал',
-                    to: '/materials/categories'
+                    title: 'Онцлог',
+                    to: '/settings/features'
                 }
             ],
             headers: [
@@ -153,7 +161,7 @@ export default {
                 }
             ],
             drawer: false,
-            materialCategory: defaultModel
+            feature: defaultModel
         }
     },
     async asyncData({ app }) {
@@ -165,7 +173,7 @@ export default {
 
         return {
             icons,
-            materialCategories: {
+            features: {
                 data,
                 total
             }
@@ -173,7 +181,7 @@ export default {
     },
     methods: {
         setModel(data = defaultModel) {
-            this.materialCategory = this.cloneObject(data, Object.keys(defaultModel))
+            this.feature = this.cloneObject(data, Object.keys(defaultModel))
             this.drawer = true
         }
     }

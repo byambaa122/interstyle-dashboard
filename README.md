@@ -21,7 +21,7 @@ npm install
 npm run dev
 ```
 
-The server will run on port 3000.
+The server will run on port 8000.
 
 ### Run server in production
 

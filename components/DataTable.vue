@@ -24,7 +24,8 @@
                 :pagination.sync="pagination"
                 :select-all="selectable"
                 :loading="loading"
-                v-model="selected"
+                :value="selected"
+                @input="v => $emit('update:selected', v)"
                 rows-per-page-text="Нэг хуудсанд"
                 no-results-text="Мэдээлэл олдсонгүй"
                 no-data-text="Мэдээлэл олдсонгүй"
@@ -39,7 +40,10 @@
                     indeterminate
                 ></v-progress-linear>
                 <!-- Rows -->
-                <template slot="items" slot-scope="props">
+                <template
+                    slot="items"
+                    slot-scope="props"
+                >
                     <tr>
                         <!-- Selectable row -->
                         <td v-if="selectable">
@@ -50,8 +54,11 @@
                             ></v-checkbox>
                         </td>
                         <!-- Row slot -->
-                        <slot name="items" :item="props.item">
-                            <td  v-for="(header, i) in headers" :key="i">
+                        <slot
+                            name="items"
+                            :item="props.item"
+                        >
+                            <td v-for="(header, i) in headers" :key="i">
                                 {{ props.item[header.value] }}
                             </td>
                         </slot>
@@ -84,6 +91,12 @@ export default {
                 }
             }
         },
+        selected: {
+            type: Array,
+            default() {
+                return []
+            }
+        },
         selectable: {
             type: Boolean,
             default: false
@@ -97,7 +110,6 @@ export default {
         return {
             search: '',
             loading: false,
-            selected: [],
             pagination: this.defaultPagination
         }
     },

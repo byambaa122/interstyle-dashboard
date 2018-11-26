@@ -4,7 +4,7 @@
             <!-- Data table -->
             <DataTable
                 :headers="headers"
-                :items.sync="materialCategories"
+                :items.sync="quotes"
                 :baseUrl="baseUrl"
                 ref="table"
             >
@@ -47,7 +47,7 @@
             <MenuBottom :items="items" />
             <!-- Edit form -->
             <DrawerForm
-                :model="materialCategory"
+                :model="quote"
                 :drawer.sync="drawer"
                 @close="$refs.table.getDataFromApi()"
                 :baseUrl="baseUrl"
@@ -60,36 +60,17 @@
                     <!-- Name field -->
                     <v-text-field
                         label="Нэр"
-                        v-model="materialCategory.name"
+                        v-model="quote.name"
                         :error-messages="props.errorMessages('name')"
                         outline
                     ></v-text-field>
-                    <!-- Icon field -->
-                     <v-autocomplete
-                        label="Айкон"
-                        v-model="materialCategory.icon"
-                        :error-messages="props.errorMessages('icon')"
-                        :items="icons"
+                    <!-- Body field -->
+                    <v-textarea
+                        label="Сэтгэгдэл"
+                        v-model="quote.body"
+                        :error-messages="props.errorMessages('body')"
                         outline
-                    >
-                        <template
-                            slot="item"
-                            slot-scope="props"
-                        >
-                            <!-- Option avatar -->
-                            <v-list-tile-avatar>
-                                <v-icon>
-                                    {{ props.item }}
-                                </v-icon>
-                            </v-list-tile-avatar>
-                            <!-- Option title -->
-                            <v-list-tile-content>
-                                <v-list-tile-title>
-                                    {{ props.item }}
-                                </v-list-tile-title>
-                            </v-list-tile-content>
-                        </template>
-                    </v-autocomplete>
+                    ></v-textarea>
                 </template>
             </DrawerForm>
         </div>
@@ -100,17 +81,17 @@
 import {
     DataTable,
     DrawerForm,
-    MenuBottom,
+        MenuBottom,
     Page
 } from '~/components'
 
 const defaultModel = {
     id: '',
     name: '',
-    icon: ''
+    body: ''
 }
 
-const apiBaseUrl = 'manage/material/categories'
+const apiBaseUrl = 'manage/quotes'
 
 export default {
     layout: 'dashboard',
@@ -122,16 +103,16 @@ export default {
     },
     data() {
         return {
-            title: 'Материал',
+            title: 'Ишлэл',
             baseUrl: apiBaseUrl,
             items: [
                 {
-                    title: 'Материал',
-                    to: '/materials'
+                    title: 'Ишлэл',
+                    to: '/settings/quotes'
                 },
                 {
-                    title: 'Ангилал',
-                    to: '/materials/categories'
+                    title: 'Онцлог',
+                    to: '/settings/features'
                 }
             ],
             headers: [
@@ -153,19 +134,15 @@ export default {
                 }
             ],
             drawer: false,
-            materialCategory: defaultModel
+            quote: defaultModel
         }
     },
     async asyncData({ app }) {
         // Get paginated material categories data
         const { data, total } = await app.$axios.$get(apiBaseUrl)
 
-        // Get all font icons
-        const { icons } = await app.$axios.$get('icons')
-
         return {
-            icons,
-            materialCategories: {
+            quotes: {
                 data,
                 total
             }
@@ -173,7 +150,7 @@ export default {
     },
     methods: {
         setModel(data = defaultModel) {
-            this.materialCategory = this.cloneObject(data, Object.keys(defaultModel))
+            this.quote = this.cloneObject(data, Object.keys(defaultModel))
             this.drawer = true
         }
     }

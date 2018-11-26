@@ -7,6 +7,7 @@
             width="400"
             fixed
             right
+            app
         >
             <v-toolbar
                 color="white"
@@ -22,19 +23,6 @@
                         mdi-close
                     </v-icon>
                 </v-btn>
-                <!-- Spacer -->
-                <v-spacer></v-spacer>
-                <!-- Delete button -->
-                <template v-if="deletable && !!model.id">
-                    <v-btn
-                        @click="dialog = true"
-                        icon
-                    >
-                        <v-icon color="pink">
-                            mdi-delete
-                        </v-icon>
-                    </v-btn>
-                </template>
             </v-toolbar>
             <!-- Divider -->
             <v-divider></v-divider>
@@ -59,8 +47,19 @@
                             type="submit"
                             color="primary"
                             :loading="loading"
-                            flat
                         >Хадгалах</v-btn>
+                        <!-- Delete button -->
+                        <template v-if="deletable && !!model.id">
+                            <!-- Delete button -->
+                            <v-btn
+                                @click="dialog = true"
+                                flat
+                            >
+                                <v-icon color="pink">
+                                    mdi-delete
+                                </v-icon>
+                            </v-btn>
+                        </template>
                     </v-card-actions>
                 </v-form>
             </v-card>

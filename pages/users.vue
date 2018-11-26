@@ -31,7 +31,7 @@
             <DrawerForm
                 :model="user"
                 :drawer.sync="drawer"
-                @hide="$refs.table.getDataFromApi()"
+                @close="$refs.table.getDataFromApi()"
                 :baseUrl="baseUrl"
                 ref="form"
             >

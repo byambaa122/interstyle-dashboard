@@ -12,10 +12,12 @@
             class="drawer-image"
             to="/"
         >
-            <img
+            <v-img
                 :src="imageSrc"
+                position="left center"
                 height="35"
-            >
+                contain
+            ></v-img>
         </router-link>
         <!-- Main menu -->
         <v-list>
@@ -60,7 +62,8 @@ export default {
                 { icon: 'mdi-home', title: 'Нүүр', to: '/' },
                 { icon: 'mdi-account', title: 'Хэрэглэгч', to: '/users' },
                 { icon: 'mdi-lamp', title: 'Бүтээгдэхүүн', to: '/products' },
-                { icon: 'mdi-wall', title: 'Материал', to: '/materials' }
+                { icon: 'mdi-wall', title: 'Материал', to: '/materials' },
+                { icon: 'mdi-settings', title: 'Нэмэлт', to: '/settings/quotes' }
             ]
         }
     },

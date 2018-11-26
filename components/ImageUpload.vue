@@ -64,7 +64,7 @@
                 </v-list-tile-action>
                 <!-- Image -->
                 <v-list-tile-avatar
-                    color="grey lighten-4"
+                    color="grey lighten-2"
                     size="60"
                 >
                     <v-img

@@ -9,6 +9,8 @@ import {
     MaterialCategories,
     Products,
     ProductCategories,
+    Features,
+    Quotes,
     Users
 } from '~/pages'
 
@@ -41,6 +43,14 @@ export function createRouter() {
             {
                 path: '/products/categories',
                 component: ProductCategories
+            },
+            {
+                path: '/settings/features',
+                component: Features
+            },
+            {
+                path: '/settings/quotes',
+                component: Quotes
             },
             {
                 path: '/login',
