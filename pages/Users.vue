@@ -96,7 +96,7 @@ const defaultModel = {
     isAdmin: false
 }
 
-const apiBaseUrl = 'users'
+const apiBaseUrl = 'manage/users'
 
 export default {
     layout: 'dashboard',

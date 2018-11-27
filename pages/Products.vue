@@ -59,7 +59,7 @@
                 >
                     <!-- Code field -->
                     <v-text-field
-                        label="Нэр"
+                        label="Код"
                         v-model="product.code"
                         :error-messages="props.errorMessages('name')"
                         outline
@@ -74,12 +74,32 @@
                         return-object
                         outline
                     ></v-select>
+                    <!-- Description field -->
+                    <v-textarea
+                        label="Тайлбар"
+                        v-model="product.description"
+                        :error-messages="props.errorMessages('description')"
+                        outline
+                    ></v-textarea>
+                    <!-- Price field -->
+                    <v-text-field
+                        label="Үнэ"
+                        v-model="product.price"
+                        :error-messages="props.errorMessages('price')"
+                        outline
+                    ></v-text-field>
                     <!-- Image field -->
                     <ImageUpload
                         v-model="product.images"
                         :error-messages="props.errorMessages('images')"
                         multiple
                     />
+                    <!-- is special -->
+                     <v-checkbox
+                        label="Онцлох"
+                        v-model="product.isSpecial"
+                        color="primary"
+                    ></v-checkbox>
                 </template>
             </DrawerForm>
         </div>
@@ -98,7 +118,10 @@ import {
 const defaultModel = {
     id: '',
     code: '',
+    description: '',
+    price: '',
     images: [],
+    isSpecial: false,
     productCategory: {
         id: '',
         name: ''
@@ -157,7 +180,7 @@ export default {
         const { data, total } = await app.$axios.$get(apiBaseUrl)
 
         // Get all product categories
-        const paginationData = await app.$axios.$get('product/categories', {
+        const paginationData = await app.$axios.$get('manage/product/categories', {
             params: {
                 rowsPerPage: -1
             }

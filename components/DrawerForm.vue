@@ -5,6 +5,7 @@
             @input="setDrawer"
             class="white"
             width="400"
+            temporary
             fixed
             right
             app

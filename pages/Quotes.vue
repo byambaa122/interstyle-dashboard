@@ -81,7 +81,7 @@
 import {
     DataTable,
     DrawerForm,
-        MenuBottom,
+    MenuBottom,
     Page
 } from '~/components'
 
