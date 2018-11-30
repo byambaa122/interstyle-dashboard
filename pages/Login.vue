@@ -13,7 +13,7 @@
                     max-width="500px"
                     flat
                 >
-                    <v-form @submit.prevent="login()">
+                    <v-form @submit.prevent="login">
                         <v-card-text>
                             <!-- Logo -->
                             <v-img

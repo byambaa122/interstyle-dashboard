@@ -66,44 +66,18 @@
             </v-card>
         </v-navigation-drawer>
         <!-- Warning dialog -->
-        <v-dialog
-            v-model="dialog"
-            width="640"
-        >
-            <v-card>
-                <!-- Dialog title -->
-                <v-card-title>
-                    <div class="title">
-                        Устгах
-                    </div>
-                </v-card-title>
-                <!-- Dialog body text -->
-                <v-card-text class="text--secondary">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla faucibus odio magna, eget tincidunt ligula semper nec.
-                </v-card-text>
-                <v-card-actions>
-                    <!-- Spacer -->
-                    <v-spacer></v-spacer>
-                    <!-- Confirm button -->
-                    <v-btn
-                        :loading="deleting"
-                        @click="destroy"
-                        color="pink"
-                        flat
-                    >Тийм</v-btn>
-                    <!-- Cancel button -->
-                    <v-btn
-                        @click="dialog = false"
-                        color="secondary"
-                        flat
-                    >Үгүй</v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
+        <DialogDelete
+            :data="model.id"
+            :dialog.sync="dialog"
+            :baseUrl="baseUrl"
+            @close="close"
+        />
     </div>
 </template>
 
 <script>
+import DialogDelete from '~/components/DialogDelete'
+
 export default {
     props: {
         model: {
@@ -123,11 +97,13 @@ export default {
             default: true
         }
     },
+    components: {
+        DialogDelete
+    },
     data() {
         return {
             errors: {},
             loading: false,
-            deleting: false,
             dialog: false
         }
     },
@@ -161,13 +137,6 @@ export default {
                     this.loading = false
                 }
             }
-        },
-        async destroy() {
-            this.deleting = true
-            await this.$axios.delete(`${this.baseUrl}/${this.model.id}`)
-            this.deleting = false
-            this.dialog = false
-            this.close()
         },
         close() {
             this.setDrawer(false)

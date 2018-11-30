@@ -59,9 +59,9 @@
                 >
                     <!-- Code field -->
                     <v-text-field
-                        label="Нэр"
+                        label="Код"
                         v-model="material.code"
-                        :error-messages="props.errorMessages('name')"
+                        :error-messages="props.errorMessages('code')"
                         outline
                     ></v-text-field>
                     <!-- Material category field -->
@@ -74,12 +74,32 @@
                         return-object
                         outline
                     ></v-select>
+                    <!-- Description field -->
+                    <v-textarea
+                        label="Тайлбар"
+                        v-model="material.description"
+                        :error-messages="props.errorMessages('description')"
+                        outline
+                    ></v-textarea>
+                    <!-- Price field -->
+                    <v-text-field
+                        label="Үнэ"
+                        v-model="material.price"
+                        :error-messages="props.errorMessages('price')"
+                        outline
+                    ></v-text-field>
                     <!-- Image field -->
                     <ImageUpload
                         v-model="material.images"
                         :error-messages="props.errorMessages('images')"
                         multiple
                     />
+                    <!-- is special -->
+                     <v-checkbox
+                        label="Онцлох"
+                        v-model="material.isSpecial"
+                        color="primary"
+                    ></v-checkbox>
                 </template>
             </DrawerForm>
         </div>
@@ -98,7 +118,10 @@ import {
 const defaultModel = {
     id: '',
     code: '',
+    description: '',
+    price: '',
     images: [],
+    isSpecial: false,
     materialCategory: {
         id: '',
         name: ''
@@ -157,7 +180,7 @@ export default {
         const { data, total } = await app.$axios.$get(apiBaseUrl)
 
         // Get all material categories
-        const paginationData = await app.$axios.$get('material/categories', {
+        const paginationData = await app.$axios.$get('manage/material/categories', {
             params: {
                 rowsPerPage: -1
             }

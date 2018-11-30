@@ -59,8 +59,7 @@ export default {
     data() {
         return {
             items: [
-                { icon: 'mdi-home', title: 'Нүүр', to: '/' },
-                { icon: 'mdi-account', title: 'Хэрэглэгч', to: '/users' },
+                { icon: 'mdi-account', title: 'Хэрэглэгч', to: '/' },
                 { icon: 'mdi-lamp', title: 'Бүтээгдэхүүн', to: '/products' },
                 { icon: 'mdi-wall', title: 'Материал', to: '/materials' },
                 { icon: 'mdi-settings', title: 'Нэмэлт', to: '/settings/quotes' }

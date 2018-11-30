@@ -22,10 +22,6 @@ export function createRouter() {
         routes: [
             {
                 path: '/',
-                component: Home
-            },
-            {
-                path: '/users',
                 component: Users
             },
             {

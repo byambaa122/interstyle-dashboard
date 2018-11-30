@@ -18,15 +18,6 @@
         ></v-toolbar-side-icon>
         <!-- Spacer -->
         <v-spacer></v-spacer>
-        <!-- Notifications button -->
-        <v-btn
-            class="grey--text"
-            icon
-        >
-            <v-icon>
-                mdi-bell
-            </v-icon>
-        </v-btn>
         <!-- Profile menu -->
         <v-menu
             class="ml-2"

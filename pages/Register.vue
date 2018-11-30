@@ -13,7 +13,7 @@
                     max-width="500px"
                     flat
                 >
-                    <v-form @submit.prevent="register()">
+                    <v-form @submit.prevent="register">
                         <v-card-text>
                             <!-- Logo -->
                             <v-img
@@ -126,7 +126,6 @@ export default {
                 this.$router.push('/login')
             } catch (err) {
                 if (err.response.status === 422) {
-                    console.log(err)
                     this.errors = err.response.data.errors
                     this.loading = false
                 }

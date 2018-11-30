@@ -83,11 +83,32 @@
                     ></v-textarea>
                     <!-- Price field -->
                     <v-text-field
-                        label="Үнэ"
+                        label="Нэгж үнэ"
                         v-model="product.price"
                         :error-messages="props.errorMessages('price')"
                         outline
                     ></v-text-field>
+                    <!-- Measure field -->
+                    <div class="subheading grey--text text--darken-1">
+                        Хэмжих нэгж
+                    </div>
+                    <v-radio-group v-model="product.measure" row>
+                        <v-radio
+                            label="м"
+                            value="linear"
+                            color="primary"
+                        ></v-radio>
+                        <v-radio
+                            label="м2"
+                            value="square"
+                            color="primary"
+                        ></v-radio>
+                        <v-radio
+                            label="м3"
+                            value="cubic"
+                            color="primary"
+                        ></v-radio>
+                    </v-radio-group>
                     <!-- Image field -->
                     <ImageUpload
                         v-model="product.images"
@@ -119,6 +140,7 @@ const defaultModel = {
     id: '',
     code: '',
     description: '',
+    measure: 'м',
     price: '',
     images: [],
     isSpecial: false,

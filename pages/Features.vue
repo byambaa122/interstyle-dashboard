@@ -28,7 +28,7 @@
                     slot="items"
                     slot-scope="props"
                 >
-                    <td>{{ props.item.name }}</td>
+                    <td>{{ props.item.title }}</td>
                     <td>{{ props.item.createdAt }}</td>
                     <td>{{ props.item.updatedAt }}</td>
                     <td class="text-xs-right">
@@ -144,8 +144,8 @@ export default {
             ],
             headers: [
                 {
-                    text: 'Нэр',
-                    value: 'name'
+                    text: 'Гарчиг',
+                    value: 'title'
                 },
                 {
                     text: 'Үүсгэсэн',

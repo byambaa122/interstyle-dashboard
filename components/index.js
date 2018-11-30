@@ -1,4 +1,5 @@
 import DataTable from './DataTable'
+import DialogDelete from './DialogDelete'
 import DrawerForm from './DrawerForm'
 import ImageUpload from './ImageUpload'
 import MainToolbar from './MainToolbar'
@@ -8,6 +9,7 @@ import Sidebar from './Sidebar'
 
 export {
     DataTable,
+    DialogDelete,
     DrawerForm,
     ImageUpload,
     MainToolbar,

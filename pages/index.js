@@ -1,4 +1,3 @@
-import Home from './Home'
 import Users from './Users'
 import Products from './Products'
 import ProductCategories from './ProductCategories'
@@ -10,7 +9,6 @@ import Login from './Login'
 import Register from './Register'
 
 export {
-    Home,
     Users,
     Products,
     ProductCategories,
