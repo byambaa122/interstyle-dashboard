@@ -47,7 +47,6 @@
         <v-list
             class="mt-4"
             v-if="!!images.length"
-            v-dragula="images"
             two-line
         >
             <v-list-tile
