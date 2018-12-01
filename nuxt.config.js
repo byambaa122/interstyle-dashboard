@@ -56,6 +56,22 @@ export default {
         port: 8000,
         host: 'localhost'
     },
+    generate: {
+        routes: [
+            '/',
+            '/materials',
+            '/materials/categories',
+            '/products',
+            '/products/categories',
+            '/settings/features',
+            '/settings/quotes',
+            '/login',
+            '/register',
+        ]
+    },
+    router: {
+        base: '/admin/'
+    },
     build: {
         extractCSS: true,
         /*
