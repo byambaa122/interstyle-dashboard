@@ -17,7 +17,7 @@
                         <v-card-text>
                             <!-- Logo -->
                             <v-img
-                                src="/images/logo.png"
+                                src="images/logo.png"
                                 height="80"
                                 contain
                             ></v-img>

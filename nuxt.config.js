@@ -20,10 +20,10 @@ export default {
         '@nuxtjs/dotenv'
     ],
     plugins: [
-        '~/helpers/filters.js',
-        '~/helpers/mixins.js',
         '~/plugins/axios.js',
-        '~/plugins/vuetify.js'
+        '~/plugins/vuetify.js',
+        '~/helpers/filters.js',
+        '~/helpers/mixins.js'
     ],
     axios: {
         baseURL: `${process.env.BASE_URL}/api`

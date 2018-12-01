@@ -69,8 +69,8 @@ export default {
     computed: {
         imageSrc() {
             return this.miniVariant
-                ? '/images/logo-symbol.png'
-                : '/images/logo-small.png'
+                ? 'images/logo-symbol.png'
+                : 'images/logo-small.png'
         }
     },
     methods: {

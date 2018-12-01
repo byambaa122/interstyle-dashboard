@@ -9,7 +9,7 @@
                 <!-- Uploader icon -->
                 <v-img
                     class="mt-3"
-                    src="/images/upload.png"
+                    src="images/upload.png"
                     height="60"
                     contain
                 ></v-img>
