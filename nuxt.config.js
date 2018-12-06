@@ -52,13 +52,6 @@ module.exports = {
     loading: {
         color: '#0078d4'
     },
-    server: {
-        port: 8000,
-        host: 'localhost'
-    },
-    router: {
-        base: '/admin/'
-    },
     build: {
         extractCSS: true,
         /*

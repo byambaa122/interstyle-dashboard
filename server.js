@@ -16,4 +16,4 @@ const nuxt = new Nuxt(config)
 app.use(nuxt.render)
 
 // Listen to port 3000 or PORT env if provided
-app.listen(process.env.PORT || 4200)
+app.listen(process.env.PORT || 3000)
