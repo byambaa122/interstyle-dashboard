@@ -1,6 +1,6 @@
-import 'dotenv/config'
+require('dotenv').config()
 
-export default {
+module.exports = {
     head: {
         title: 'interstyle',
         meta: [
@@ -55,19 +55,6 @@ export default {
     server: {
         port: 8000,
         host: 'localhost'
-    },
-    generate: {
-        routes: [
-            '/',
-            '/materials',
-            '/materials/categories',
-            '/products',
-            '/products/categories',
-            '/settings/features',
-            '/settings/quotes',
-            '/login',
-            '/register',
-        ]
     },
     router: {
         base: '/admin/'
